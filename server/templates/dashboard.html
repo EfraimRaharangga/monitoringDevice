@@ -1,0 +1,42 @@
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Monitoring CPU & RAM</title>
+    <script src="{{ url_for('static', filename='js/auto_update.js') }}"></script>
+    <style>
+      body {
+        font-family: Arial;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Monitoring CPU & RAM Client</h2>
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th>Client IP</th>
+          <th>CPU Usage (%)</th>
+          <th>RAM Usage (%)</th>
+          <th>Last Update</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </body>
+</html>
