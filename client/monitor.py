@@ -4,7 +4,7 @@ import time
 import requests
 import threading
 
-SERVER_URL = "http://127.0.0.1:5000/data"  # Ganti dengan IP server Flask
+SERVER_URL = "http://172.16.94.90:5000/data"  # Ganti dengan IP server Flask
 
 def get_system_data():
     return {

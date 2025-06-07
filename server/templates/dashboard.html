@@ -4,39 +4,74 @@
   <head>
     <meta charset="UTF-8" />
     <title>Monitoring CPU & RAM</title>
+    <script src="{{ url_for('static', filename='js/jquery-3.7.1.js') }}"></script>
     <script src="{{ url_for('static', filename='js/auto_update.js') }}"></script>
-    <style>
-      body {
-        font-family: Arial;
-      }
-      table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 20px;
-      }
-      th,
-      td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: center;
-      }
-      th {
-        background-color: #f4f4f4;
-      }
-    </style>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style></style>
   </head>
-  <body>
-    <h2>Monitoring CPU & RAM Client</h2>
-    <table id="data-table">
-      <thead>
-        <tr>
-          <th>Client IP</th>
-          <th>CPU Usage (%)</th>
-          <th>RAM Usage (%)</th>
-          <th>Last Update</th>
+  <body class="min-h-screen flex flex-col my-5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            items-center ">
+     <h2 class="text-2xl font-semibold text-gray-900 sm:text-3xl mb-3">
+            Monitoring CPU & RAM Client
+          </h2>
+          <div class="gauge">
+            <div id="chart_div" class=""></div>
+          </div>
+    <table id="data-table" class="min-w-full divide-y-2 divide-gray-200">
+      <thead class="ltr:text-left rtl:text-right">
+        <tr class="*:font-medium *:text-gray-900">
+          <th class="px-3 py-2 whitespace-nowrap">Client IP</th>
+          <th class="px-3 py-2 whitespace-nowrap">CPU Usage (%)</th>
+          <th class="px-3 py-2 whitespace-nowrap">RAM Usage (%)</th>
+          <th class="px-3 py-2 whitespace-nowrap">Last Update</th>
         </tr>
-      </thead>
+      </thead class="divide-y divide-gray-200">
       <tbody></tbody>
     </table>
+    <script>
+      google.charts.load("current", { packages: ["gauge"] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ["Label", "Value"],
+          ["Memory", 80],
+          ["CPU", 55],
+          ["Network", 68],
+        ]);
+
+        var options = {
+          width: 400,
+          height: 120,
+          redFrom: 90,
+          redTo: 100,
+          yellowFrom: 75,
+          yellowTo: 90,
+          minorTicks: 5,
+        };
+
+        var chart = new google.visualization.Gauge(
+          document.getElementById("chart_div")
+        );
+
+        chart.draw(data, options);
+
+        setInterval(function () {
+          data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+          chart.draw(data, options);
+        }, 13000);
+        setInterval(function () {
+          data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
+          chart.draw(data, options);
+        }, 5000);
+        setInterval(function () {
+          data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+          chart.draw(data, options);
+        }, 26000);
+      }
+    </script>
   </body>
 </html>
