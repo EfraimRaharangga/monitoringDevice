@@ -37,6 +37,8 @@ Proyek ini dibangun dengan kombinasi teknologi backend dan frontend:
 ## Struktur Proyek
 
 Berikut adalah struktur direktori proyek `monitoringDevices`:
+
+```
 monitoringDevices/
 ├── README.md
 ├── requirements.txt
@@ -54,6 +56,7 @@ monitoringDevices/
 │ └── dashboard.html
 ├── app.py
 └── dataStore.py
+```
 
 ---
 
