@@ -1,13 +1,14 @@
-# monitor.py
 import psutil
 import time
 import requests
 import threading
+import socket  # Untuk mendapatkan nama komputer
 
-SERVER_URL = "http://192.168.43.229:5000/data"  # Ganti dengan IP server Flask
+SERVER_URL = "https://4533-103-214-229-136.ngrok-free.app/data" 
 
 def get_system_data():
     return {
+        "hostname": socket.gethostname(),  # Menambahkan nama komputer
         "cpu_percent": psutil.cpu_percent(interval=1),
         "ram_percent": psutil.virtual_memory().percent
     }
@@ -16,7 +17,8 @@ def send_data():
     while True:
         try:
             data = get_system_data()
-            requests.post(SERVER_URL, json=data, timeout=5)
+            response = requests.post(SERVER_URL, json=data, timeout=5)
+            print(f"Data sent. Status code: {response.status_code}")
         except Exception as e:
             print(f"Failed to send data: {e}")
         time.sleep(5)

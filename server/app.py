@@ -12,7 +12,7 @@ def index():
 @app.route('/data', methods=['POST'])
 def receive_data():
     content = request.json
-    ip = request.remote_addr
+    ip = content.get('hostname')
     timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     
     content['timestamp'] = timestamp
