@@ -4,7 +4,7 @@ import requests
 import threading
 import socket  # Untuk mendapatkan nama komputer
 
-SERVER_URL = "https://4533-103-214-229-136.ngrok-free.app/data" 
+SERVER_URL = "https://41aa-103-214-229-137.ngrok-free.app/data" 
 
 def get_system_data():
     return {
